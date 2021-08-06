@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+<style>
+    .success{
+        color:green;
+    }
+</style>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>blogAdmin</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    </head>
+    <body> 
+    <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-light sticky-top nav justify-content-end" style="background-color: #FFFFFF;">
+    <div class="justify-content-left" style="padding: 0px 117px 7px 0px;"><h1 class="text-black font-weight-bold wow fadeInLeft">LibraryManagementSystem</h1></div>
+    <!-- Navbar content -->
+    <ul class="nav justify-content-start">
+            {% if user.is_authenticated %}
+            <li class="nav-item"><h6 class="white-text font-weight-bold wow fadeInLeft">Welcome {{user.username}}</h6></li>
+            {% endif %}
+        </ul>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'indexAdmin' %}"><h6 class="white-text font-weight-bold wow fadeInLeft">Home</h6></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'createBlog' %}"><h6 class="white-text font-weight-bold wow fadeInLeft">CreateBlog</h6></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}"><h6 class="white-text font-weight-bold wow fadeInLeft btn btn-danger">logout</h6></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</header>
+<div class="container">
+      <div class="row justify-content-center">
+        <div class="col-8">
+            <h2 class="mt-2 white-text font-weight-bold wow fadeInLeft">Admin Panel: Blog's</h2>
+            <hr class="mt-0 mb-4">
+            {% if messages %}
+            {% for msg in messages %}
+                <p class="mt-2 white-text font-weight-bold wow fadeInLeft"><span class={{msg.tags}}>{{msg}}</span></p>
+            {% endfor %}   
+            {% endif %}
+            <hr class="mt-0 mb-4">
+            <!--Book Table -->
+            {% if blog %}
+            <table class="table table-hover table-bordered">
+                <tr>
+                    <th>Id</th>
+                    <th>BlogName</th>
+                    <th>HostName</th>
+                    <th>DateofPublished</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+                <tbody>
+                    {% for i in blog %}
+                <tr>
+                    <td>{{i.Id}}</td>
+                    <td>{{i.BlogBame}}</td>
+                    <td>{{i.HostName}}</td>
+                    <td>{{i.DateofPublished}}</td>
+                    <td><a href="{% url 'updateBlog' i.Id %}" class="btn btn-primary"><h6 class="white-text font-weight-bold wow fadeInLeft">Update</h6></a></td>
+                    <td><a href="{% url 'delBlog' i.Id %}" class="btn btn-danger"><h6 class="white-text font-weight-bold wow fadeInLeft">Delete</h6></a></td>
+                </tr>
+                    {% endfor %}
+            {% else %}
+                <h2> No Ddatabase in Table </h2>
+                </tbody>
+             </table>
+            {% endif %}
+        </div>
+        
+        <script src="" async defer></script>
+    </body>
+</html>

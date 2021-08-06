@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+<style>
+.success{
+    color:green;
+}
+</style>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Blog</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    </head>
+    <body>
+    <header>
+    <!--Navbar-->
+    <nav class="navbar navbar-light sticky-top nav justify-content-end" style="background-color: #FFFFFF;">
+    <div class="justify-content-left" style="padding: 0px 450px 7px 0px;"><h1 class="text-black font-weight-bold wow fadeInLeft">BlogSite</h1></div>
+      <!-- Navbar content -->
+      <div class="nav justify-content-end">
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'index' %}"><h6 class="white-text font-weight-bold wow fadeInLeft">Home</h6></a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-outline-danger my-2 my-sm-0" href="{% url 'admLogin' %}"><h6 class="white-text font-weight-bold wow fadeInLeft">AdminLogin</h6></a>
+            </li>
+            </li>
+        </ul>
+      </div>
+    </nav>
+</header>
+<div class="container">
+      <div class="row justify-content-center">
+        <div class="col-8">
+            <h2 class="mt-2 white-text font-weight-bold wow fadeInLeft">This are the Blog's</h2>
+            <hr class="mt-0 mb-4">
+            {% if blog %}
+                {% for i in blog %}
+                <div class="white-text font-weight-bold wow fadeInLeft">
+                    <h3>
+                    {{i.BlogBame}}<span> By :</span>
+                    {{i.HostName}}
+                    </h3>
+                    <hr class="mt-0 mb-4">
+                    {{i.Description}}
+                    {{i.DateofPublished}}
+                    <hr class="mt-0 mb-4">
+                </div>
+                {% endfor %}
+            {% else %}
+                <h2> No Blogs Are There! </h2>
+            {% endif %}
+        </div>
+        <script src="" async defer></script>
+    </body>
+</html>

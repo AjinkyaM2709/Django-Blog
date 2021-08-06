@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>AdminLogin</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    </head>
+    <body>
+    <header>
+    <div class="view">
+    <nav class="navbar navbar-light sticky-top nav justify-content-end" style="background-color: #FFFFFF;">
+    <div class="justify-content-left" style="padding: 0px 580px 7px 0px;"><h1 class="text-black font-weight-bold wow fadeInLeft">BlogSite</h1></div>
+    <!-- Navbar content -->
+    <ul class="nav justify-content-end">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'index' %}"><h6 class="white-text font-weight-bold wow fadeInLeft">Home</h6></a>
+        </li>
+    </ul>
+    </nav>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-8">
+            <h2 class="mt-2 white-text font-weight-bold wow fadeInLeft">Admmin Login</h2>
+            <hr class="mt-0 mb-4">
+            {% if messages %}
+            {% for msg in messages %}
+                <p><span class={{msg.tags}}>{{msg}}</span></p>
+                <hr class="mt-0 mb-4">
+            {% endfor %}   
+            {% endif %}
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-success"><h6 class="white-text font-weight-bold wow fadeInLeft">SignIn</h6></button>
+            </form>
+        </div>
+      </div>
+    </div> 
+</header>       
+        <script src="" async defer></script>
+    </body>
+</html>
